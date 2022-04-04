@@ -6,6 +6,5 @@ def Load(path : str,key : str) -> BaseSaveAbleObject:
     with shelve.open(path) as db:
         if isinstance(db[key],BaseSaveAbleObject):
             return db[key]
-        print(db[key])
         obj = db[key]['type'].Load(db[key]['data'])
     return obj

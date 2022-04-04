@@ -24,7 +24,6 @@ class Obj(YbrEegol.BaseSaveAbleObject):
         return Obj(data['x'],data['y'])
 
 obj = Obj(100,200)
-print(obj.GetData())
 YbrEegol.Save(obj,'test','obj')
 obj2 = YbrEegol.Load('test','obj')
 print(obj2.surface.get_width(),obj2.surface.get_height())
