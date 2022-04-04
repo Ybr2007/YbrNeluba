@@ -1,27 +1,30 @@
 '''
-1.0.0
+1.0.1
 Time:2022.4.5
-测试：
-1.Object基类
-2.CallBack
-3.矩阵与向量
+1.测试Saver
 '''
 
 import YbrEegol
+import pygame
 
-#1.Object基类
-class Obj(YbrEegol.BaseObject):
-    def __init__(self):
-        print("A new Obj is created")
+class Obj(YbrEegol.BaseSaveAbleObject):
+    def __init__(self,x,y):
+        self.surface = pygame.Surface((x,y))
+    
+    def GetData(self):
+        return {
+            'type':self.__class__,
+            'data':{
+                'x':self.surface.get_width(),
+                'y':self.surface.get_height()
+            }
+        }
 
-obj = Obj()
+    def Load(data):
+        return Obj(data['x'],data['y'])
 
-#2.CallBack
-callBack = YbrEegol.CallBack(print,"CallBack","is called")
-callBack()
-
-#3.矩阵与向量
-v = YbrEegol.Vector2(1,2)
-print(v)
-m = YbrEegol.Matrix(3,3,[[1,0,0],[0,1,0],[0,0,1]])
-print(YbrEegol.MatrixToVector2(m(v)))
+obj = Obj(100,200)
+print(obj.GetData())
+YbrEegol.Save(obj,'test','obj')
+obj2 = YbrEegol.Load('test','obj')
+print(obj2.surface.get_width(),obj2.surface.get_height())
