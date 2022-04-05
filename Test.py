@@ -1,29 +1,28 @@
 '''
-1.0.1
+1.0.2
 Time:2022.4.5
-1.测试Saver
+1.测试Framework
 '''
 
-import YbrEegol
+import YbrMatrixSo
 import pygame
 
-class Obj(YbrEegol.BaseSaveAbleObject):
-    def __init__(self,x,y):
-        self.surface = pygame.Surface((x,y))
-    
-    def GetData(self):
-        return {
-            'type':self.__class__,
-            'data':{
-                'x':self.surface.get_width(),
-                'y':self.surface.get_height()
-            }
-        }
+YbrMatrixSo.Init()
+window = YbrMatrixSo.CreateWindow((800,600),"Test",resizable=True)
 
-    def Load(data):
-        return Obj(data['x'],data['y'])
+def Start():
+    pass
 
-obj = Obj(100,200)
-YbrEegol.Save(obj,'test','obj')
-obj2 = YbrEegol.Load('test','obj')
-print(obj2.surface.get_width(),obj2.surface.get_height())
+def Update():
+    pass
+
+def Draw():
+    window.fill((255,255,255))
+    pass
+
+def EventManage(event):
+    if event.type == pygame.QUIT:
+        YbrMatrixSo.Exit()
+
+if __name__ == "__main__":
+    YbrMatrixSo.Framework(Start,Update,Draw,EventManage,60)
