@@ -11,6 +11,7 @@ class BaseSaveAbleObject(BaseException,metaclass = abc.ABCMeta):
         '''
         获取数据
         '''
+        raise NotImplementedError("GetData()没有实现")
         pass
 
     @staticmethod
@@ -19,4 +20,4 @@ class BaseSaveAbleObject(BaseException,metaclass = abc.ABCMeta):
         '''
         加载数据
         '''
-        pass
+        raise NotImplementedError("Load()没有实现")

@@ -11,4 +11,4 @@ class BaseUpdateObject(BaseObject,metaclass = abc.ABCMeta):
         '''
         更新
         '''
-        pass
+        raise NotImplementedError("Update()没有实现")

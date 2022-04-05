@@ -11,18 +11,18 @@ class BasePlayObject(BaseObject,metaclass = abc.ABCMeta):
         '''
         播放
         '''
-        pass
+        raise NotImplementedError("Play()没有实现")
 
     @abc.abstractmethod
     def Stop(self):
         '''
         停止
         '''
-        pass
+        raise NotImplementedError("Stop()没有实现")
 
     @abc.abstractmethod
     def Pause(self):
         '''
         暂停
         '''
-        pass
+        raise NotImplementedError("Pause()没有实现")
