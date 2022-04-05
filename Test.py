@@ -1,7 +1,7 @@
 '''
-1.0.3
+1.0.4
 Time:2022.4.5
-1.测试Image
+1.测试Shape
 '''
 
 import YbrMatrixSo
@@ -10,10 +10,11 @@ import pygame
 YbrMatrixSo.Init()
 window = YbrMatrixSo.CreateWindow((800,600),"Test",resizable=True)
 
-'''image = YbrMatrixSo.Image(YbrMatrixSo.Vector2(0,0),YbrMatrixSo.Vector2(800,600),"LogoV5.png",True)
-YbrMatrixSo.Save(image,"Data",'image')'''
+rect = YbrMatrixSo.Rect(YbrMatrixSo.Vector2(100,100),YbrMatrixSo.Vector2(100,100),r = 10)
+YbrMatrixSo.Save(rect,'Test','rect')
 
-image = YbrMatrixSo.Load("Data","image")
+
+#rect = YbrMatrixSo.Load('Test','rect')
 
 def Start():
     pass
@@ -23,7 +24,7 @@ def Update():
 
 def Draw():
     window.fill((255,255,255))
-    image.Draw(window)
+    rect.Draw(window)
     pass
 
 def EventManage(event):
