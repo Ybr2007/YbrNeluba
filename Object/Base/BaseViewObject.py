@@ -16,4 +16,4 @@ class BaseViewObject(BasePhysicalObject,metaclass = abc.ABCMeta):
         参数:
             surface:绘制的Surface
         '''
-        pass
+        surface.blit(self.surface,self.position.tuple)

@@ -21,3 +21,21 @@ class BasePhysicalObject(BaseObject,metaclass = abc.ABCMeta):
         '''
         self.position = position
         self.size = size
+
+    @abc.abstractmethod
+    def SetPosition(self,position : Vector2):
+        '''
+        设置位置
+        参数:
+            position:位置
+        '''
+        self.position = position
+
+    @abc.abstractmethod
+    def SetSize(self,size : Vector2):
+        '''
+        设置大小
+        参数:
+            size:大小
+        '''
+        self.size = size

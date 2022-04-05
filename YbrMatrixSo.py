@@ -16,3 +16,5 @@ from Funcation.Funcation import *
 from Saver.Saver import *
 from Framework.Framework import *
 from Framework.GlobalVariable import *
+from Debug.Debug import *
+from Object.Objects import *
