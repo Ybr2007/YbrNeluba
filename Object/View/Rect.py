@@ -29,6 +29,11 @@ class Rect(BaseViewObject,BaseSaveAbleObject):
         return super().SetSize(size)
 
     def Draw(self, surface: pygame.Surface):
+        self.surface = pygame.Surface(self.size.tuple)
+        self.surface.set_colorkey(Color.Black.value)
+        self.surface = self.surface.convert_alpha()
+
+        pygame.draw.rect(self.surface, self.color, (0, 0, self.size.x, self.size.y), self.width, self.r)
         return super().Draw(surface)
 
     def GetData(self):

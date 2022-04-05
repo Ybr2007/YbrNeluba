@@ -49,6 +49,12 @@ class Vector2(Matrix):
         '''
         return str(self.tuple)
 
+    def Abs(self):
+        '''
+        返回绝对值
+        '''
+        return Vector2(abs(self.x),abs(self.y))
+
 class Vector3(Matrix):
     '''
     YbrPygame Max 中的3维向量

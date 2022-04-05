@@ -32,24 +32,19 @@ class BaseSet(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
             if isinstance(obj,BasePhysicalObject):
                 obj.SetPosition(obj.position + dPos)
 
-    def SetSize(self, size: Vector2):#TODO:修复子object的size不随着Set的size变化的BUG
+    def SetSize(self, size: Vector2):
         '''
         设置大小
         '''
-        if self.size.x == 0:
-            self.size.x = 1e-18 
-        if self.size.y == 0:
-            self.size.y = 1e-18
-
-        dSizeX = size.x / self.size.x
-        dSizeY = size.y / self.size.y
+        dSizeX = size.x - self.size.x
+        dSizeY = size.y - self.size.y
 
 
         self.size = size
 
         for obj in self.objects:
             if isinstance(obj,BasePhysicalObject):
-                obj.SetSize(Vector2(obj.size.x * dSizeX,obj.size.y * dSizeY))
+                obj.SetSize(Vector2(obj.size.x + dSizeX,obj.size.y + dSizeY))
 
     def Update(self):
         '''

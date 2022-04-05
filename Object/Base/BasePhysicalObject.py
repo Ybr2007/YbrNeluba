@@ -32,7 +32,7 @@ class BasePhysicalObject(BaseObject,metaclass = abc.ABCMeta):
         self.position = position
 
     @abc.abstractmethod
-    def SetSize(self,size : Vector2):
+    def SetSize(self,size : Vector2):#TODO:当size中的x或y为负数时，会出现问题，应进行特殊处理
         '''
         设置大小
         参数:
