@@ -5,3 +5,4 @@ from Object.View.Circle import Circle
 from Object.View.Text import Text
 from Object.Play.Audio import *
 from Object.Play.Timer import Timer
+from Object.Play.TimeLine import TimeLine

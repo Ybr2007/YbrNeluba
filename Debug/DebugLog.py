@@ -1,4 +1,5 @@
 from enum import Enum
+import Framework.GlobalVariable as GlobalVariable
 
 class DebugType(Enum):
     Print = 'Print'
@@ -28,7 +29,7 @@ class Debug(object):
         elif type == DebugType.Debug:
             print('\033[0;35m'+type.value+":")
         if record:
-            Debug.__record.append((type,args))
+            Debug.__record.append((type,args,GlobalVariable.runTime))
         print(' ',end='')
         print(*args,'\033[0m')
 
@@ -36,6 +37,6 @@ class Debug(object):
     def Record():
         print("\033[3;44m"+"Record:"+str(len(Debug.__record)),"\033[0m")
         for i in Debug.__record:
-            print('\033[3;46m'+"."+'\033[0m',end='')
+            print('\033[3;46m'+"At:"+str(i[2])+'\033[0m',end='')
             Debug.Log(i[1],type=i[0],record=False)
         print('\033[3;44m'+"End"+'\033[0m')
