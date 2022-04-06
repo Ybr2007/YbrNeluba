@@ -1,3 +1,4 @@
+from Debug.DebugLog import Debug,DebugType
 from Object.Base.BaseViewObject import BaseViewObject
 from Object.Base.BaseSaveAbleObject import BaseSaveAbleObject
 from Math.Math import *
@@ -25,6 +26,8 @@ class Image(BaseViewObject,BaseSaveAbleObject):
         else:
             self.surface = pygame.image.load(imagePath)
 
+        self.__oriSurface = self.surface
+
         if size is None:
             self.size = Vector2(self.surface.get_width(),self.surface.get_height())
         else:
@@ -34,8 +37,14 @@ class Image(BaseViewObject,BaseSaveAbleObject):
     def SetPosition(self, position: Vector2):
         return super().SetPosition(position)
 
-    def SetSize(self, size: Vector2):
-        return super().SetSize(size)
+    def SetSize(self, size: Vector2 or float):
+        if isinstance(size,Vector2):#如果size是Vector2类型,则表示图片尺寸
+            super().SetSize(size)
+            self.surface = pygame.transform.smoothscale(self.__oriSurface,self.size.tuple)
+        elif isinstance(size,float):#如果size是float类型,则表示图片的缩放比例
+            d = self.size.length / size
+            super().SetSize(self.size / d)
+            self.surface = pygame.transform.smoothscale(self.__oriSurface,self.size.tuple)
 
     def Draw(self, surface: pygame.Surface):
         return super().Draw(surface)

@@ -1,22 +1,20 @@
 '''
-1.1.2
+1.1.3
 Time:2022.4.6
-1.测试BaseSet
+1.为ViewObject的SetSize添加等比缩放重载
 '''
 
+from Debug.DebugLog import Debug,DebugType
 import YbrMatrixSo
 import pygame
 
 YbrMatrixSo.Init()
 window = YbrMatrixSo.CreateWindow((800,600),"Test",resizable=True)
 
-obj = YbrMatrixSo.BaseSet(YbrMatrixSo.Vector2(20,20),YbrMatrixSo.Vector2(200,200),
-[
-    YbrMatrixSo.Rect(YbrMatrixSo.Vector2(0,0),YbrMatrixSo.Vector2(100,100),width=1),
-    YbrMatrixSo.Rect(YbrMatrixSo.Vector2(20,20),YbrMatrixSo.Vector2(50,50),width=1,color = YbrMatrixSo.Color.Red.value),
-])
+obj = YbrMatrixSo.Text(
+    YbrMatrixSo.Vector2(0,0),text='Text',
+)
 
-obj = YbrMatrixSo.Rect(YbrMatrixSo.Vector2(20,20),YbrMatrixSo.Vector2(200,200),width=1)
 
 def Start():
     pass
@@ -24,13 +22,13 @@ def Start():
 def Update():
     x,y = pygame.mouse.get_pos()
     if pygame.mouse.get_pressed()[0]:
-        obj.SetPosition(YbrMatrixSo.Vector2(x,y))
+        obj.SetSize((YbrMatrixSo.Vector2(x,y) - obj.position).length)
     if pygame.mouse.get_pressed()[2]:
         obj.SetSize(YbrMatrixSo.Vector2(x,y) - obj.position)
     pass
 
 def Draw():
-    window.fill((255,255,255))
+    window.fill((0,0,0))
     obj.Draw(window)
     pass
 

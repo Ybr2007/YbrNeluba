@@ -24,18 +24,26 @@ class Text(BaseViewObject,BaseSaveAbleObject):
 
         self.surface = self.font.render(self.text,True,self.color)
 
+        self.oriSurface = self.surface
+
     def SetPosition(self, position: Vector2):
         return super().SetPosition(position)
 
-    def SetSize(self, fontSize: int):
-        self.fontSize = fontSize
-           
-        if self.useSystemFont:
-            self.font = pygame.font.SysFont(self.fontName,fontSize)
-        else:
-            self.font = pygame.font.Font(self.fontName,fontSize)
+    def SetSize(self, fontSize: int or Vector2 or float):
+        if isinstance(fontSize,int) or isinstance(fontSize,float):
+            fontSize = int(fontSize)
+            self.fontSize = fontSize
+            
+            if self.useSystemFont:
+                self.font = pygame.font.SysFont(self.fontName,fontSize)
+            else:
+                self.font = pygame.font.Font(self.fontName,fontSize)
 
-        self.surface = self.font.render(self.text,True,self.color)
+            self.surface = self.font.render(self.text,True,self.color)
+        elif isinstance(fontSize,Vector2):
+            super().SetSize(fontSize)
+
+            self.surface = pygame.transform.scale(self.oriSurface, self.size.tuple)
 
     def SetText(self, text: str):
         self.text = text

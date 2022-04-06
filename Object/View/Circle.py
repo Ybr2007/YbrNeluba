@@ -1,3 +1,4 @@
+from Debug.DebugLog import Debug, DebugType
 from Object.Base.BaseViewObject import BaseViewObject
 from Object.Base.BaseSaveAbleObject import BaseSaveAbleObject
 import pygame
@@ -25,8 +26,25 @@ class Circle(BaseViewObject,BaseSaveAbleObject):
     def SetPosition(self, position: Vector2):
         return super().SetPosition(position)
 
-    def SetSize(self, size: Vector2):
-        return super().SetSize(size)
+    def SetSize(self, size: Vector2 or float):
+        if isinstance(size,Vector2):#如果size是Vector2类型,则表示椭圆外接矩形的大小
+            super().SetSize(size)
+
+            self.surface = pygame.Surface((self.r * 2,self.r * 2))
+            self.surface.set_colorkey(Color.Black.value)
+            self.surface = self.surface.convert_alpha()
+
+            pygame.draw.circle(self.surface, self.color, (self.r,self.r), self.r, self.width)
+            self.surface = pygame.transform.scale(self.surface, self.size.tuple)
+        elif isinstance(size,float):#如果size是int类型,则表示圆的直径
+            Debug.Log("Circle.SetSize(int)",type=DebugType.Success)
+            self.r = size/2
+
+            self.surface = pygame.Surface((self.r * 2,self.r * 2))
+            self.surface.set_colorkey(Color.Black.value)
+            self.surface = self.surface.convert_alpha()
+
+            pygame.draw.circle(self.surface, self.color, (self.r,self.r), self.r, self.width)
 
     def Draw(self, surface: pygame.Surface):
         return super().Draw(surface)
