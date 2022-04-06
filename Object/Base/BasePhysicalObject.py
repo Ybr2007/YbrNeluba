@@ -1,6 +1,7 @@
 # 导入模块
 from Object.Base.BaseObject import BaseObject
 from Math.Math import *
+from Debug.Debug import *
 import abc
 
 class BasePhysicalObject(BaseObject,metaclass = abc.ABCMeta):
@@ -38,4 +39,7 @@ class BasePhysicalObject(BaseObject,metaclass = abc.ABCMeta):
         参数:
             size:大小
         '''
+        if size.x <= 0 or size.y <= 0:
+            Debug.Log("size的x或y值不能小于等于0",type=DebugType.Error)
+            return
         self.size = size
