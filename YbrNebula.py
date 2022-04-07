@@ -9,7 +9,7 @@ except ImportError:
     print("YbrEegol是基于pygame的，请先安装pygame")
     os._exit(0)
 
-# 导入YbrEegol模块
+# 导入YbrNebula模块
 from Math.Math import *
 from Object.Base.Base import *
 from Funcation.Funcation import *

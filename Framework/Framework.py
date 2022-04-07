@@ -46,7 +46,7 @@ def Init():
     return True
 
 def CreateWindow(size : tuple = (800,600),title : str = 'YpgWindow',
-icon : pygame.Surface = None,fullWindow : bool = False,resizable : bool = False):
+icon : pygame.Surface = None,fullWindow : bool = False,resizable : bool = False,noFrame : bool = False):
     '''
     创建窗口
     参数:
@@ -57,7 +57,9 @@ icon : pygame.Surface = None,fullWindow : bool = False,resizable : bool = False)
     if fullWindow:
         window = pygame.display.set_mode(GetScreenSize(),pygame.FULLSCREEN)
     elif resizable:
-        window = pygame.display.set_mode(size,pygame.RESIZABLE)
+        window = pygame.display.set_mode(size,pygame.RESIZABLE,pygame.NOFRAME)
+    elif noFrame:
+        window = pygame.display.set_mode(size,pygame.NOFRAME)
     else:
         window = pygame.display.set_mode(size)
     pygame.display.set_caption(title)

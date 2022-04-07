@@ -1,9 +1,9 @@
 # 导入YbrMatrixSo自带的Object
-from Object.View.Image import Image
-from Object.View.Rect import Rect
-from Object.View.Circle import Circle
-from Object.View.Text import Text
-from Object.Play.Audio import *
-from Object.Play.Timer import Timer
-from Object.Play.TimeLine import TimeLine
-from Object.Set.BaseSet import BaseSet
+from Object.Component.Image import *
+from Object.Component.Rect import *
+from Object.Component.Circle import *
+from Object.Component.Text import *
+from Object.Component.Audio import *
+from Object.Component.Timer import *
+from Object.Component.TimeLine import *
+from Object.Set.BaseSet import *
