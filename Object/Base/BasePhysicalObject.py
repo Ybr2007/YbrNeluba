@@ -39,7 +39,15 @@ class BasePhysicalObject(BaseObject,metaclass = abc.ABCMeta):
         参数:
             size:大小
         '''
-        if size.x <= 0 or size.y <= 0:
-            Debug.Log("size的x或y值不能小于等于0",type=DebugType.Error)
-            return
+        size = size.Abs()
         self.size = size
+
+    @abc.abstractmethod
+    def SetScale(self,scale : float):
+        '''
+        设置缩放
+        参数:
+            scale:缩放
+        '''
+        d = self.size.length / scale
+        self.SetSize(self.size / d)

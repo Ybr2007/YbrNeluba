@@ -37,14 +37,13 @@ class Image(BaseViewObject,BaseSaveAbleObject):
     def SetPosition(self, position: Vector2):
         return super().SetPosition(position)
 
-    def SetSize(self, size: Vector2 or float):
-        if isinstance(size,Vector2):#如果size是Vector2类型,则表示图片尺寸
-            super().SetSize(size)
-            self.surface = pygame.transform.smoothscale(self.__oriSurface,self.size.tuple)
-        elif isinstance(size,float):#如果size是float类型,则表示图片的缩放比例
-            d = self.size.length / size
-            super().SetSize(self.size / d)
-            self.surface = pygame.transform.smoothscale(self.__oriSurface,self.size.tuple)
+    def SetSize(self, size : Vector2):
+        super().SetSize(size)
+        self.surface = pygame.transform.smoothscale(self.__oriSurface,self.size.tuple)
+    
+    def SetScale(self,scale : float):
+        super().SetScale(scale)
+        self.surface = pygame.transform.smoothscale(self.__oriSurface,self.size.tuple)
 
     def Draw(self, surface: pygame.Surface):
         return super().Draw(surface)

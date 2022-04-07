@@ -25,23 +25,22 @@ class Rect(BaseViewObject,BaseSaveAbleObject):
     def SetPosition(self, position: Vector2):
         return super().SetPosition(position)
 
-    def SetSize(self, size: Vector2 or float):
-        if isinstance(size,Vector2):
-            super().SetSize(size)
-            self.surface = pygame.Surface(self.size.tuple)
-            self.surface.set_colorkey(Color.Black.value)
-            self.surface = self.surface.convert_alpha()
+    def SetSize(self, size: Vector2):
+        super().SetSize(size)
+        self.surface = pygame.Surface(self.size.tuple)
+        self.surface.set_colorkey(Color.Black.value)
+        self.surface = self.surface.convert_alpha()
 
-            pygame.draw.rect(self.surface, self.color, (0, 0, self.size.x, self.size.y), self.width, self.r)
-        elif isinstance(size,float):
-            d = self.size.length / size
-            super().SetSize(self.size / d)
+        pygame.draw.rect(self.surface, self.color, (0, 0, self.size.x, self.size.y), self.width, self.r)
+    
+    def SetScale(self, scale: float):
+        super().SetScale(scale)
             
-            self.surface = pygame.Surface(self.size.tuple)
-            self.surface.set_colorkey(Color.Black.value)
-            self.surface = self.surface.convert_alpha()
+        self.surface = pygame.Surface(self.size.tuple)
+        self.surface.set_colorkey(Color.Black.value)
+        self.surface = self.surface.convert_alpha()
 
-            pygame.draw.rect(self.surface, self.color, (0, 0, self.size.x, self.size.y), self.width, self.r)
+        pygame.draw.rect(self.surface, self.color, (0, 0, self.size.x, self.size.y), self.width, self.r)
     def Draw(self, surface: pygame.Surface):
         return super().Draw(surface)
 

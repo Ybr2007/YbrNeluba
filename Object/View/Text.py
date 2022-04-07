@@ -26,24 +26,32 @@ class Text(BaseViewObject,BaseSaveAbleObject):
 
         self.oriSurface = self.surface
 
+        self.size = Vector2(self.surface.get_width(),self.surface.get_height())
+
     def SetPosition(self, position: Vector2):
         return super().SetPosition(position)
 
-    def SetSize(self, fontSize: int or Vector2 or float):
-        if isinstance(fontSize,int) or isinstance(fontSize,float):
-            fontSize = int(fontSize)
-            self.fontSize = fontSize
+    def SetSize(self, fontSize: Vector2):
+        
+        super().SetSize(fontSize)
+
+        self.surface = pygame.transform.scale(self.oriSurface, self.size.tuple)
+
+    def SetScale(self, scale: float):
+        super().SetScale(scale)
+
+        self.surface = pygame.transform.scale(self.oriSurface, self.size.tuple)
+
+    def SetFontSize(self,fontSize : float):
+        fontSize = int(fontSize)
+        self.fontSize = fontSize
             
-            if self.useSystemFont:
-                self.font = pygame.font.SysFont(self.fontName,fontSize)
-            else:
-                self.font = pygame.font.Font(self.fontName,fontSize)
+        if self.useSystemFont:
+            self.font = pygame.font.SysFont(self.fontName,fontSize)
+        else:
+            self.font = pygame.font.Font(self.fontName,fontSize)
 
-            self.surface = self.font.render(self.text,True,self.color)
-        elif isinstance(fontSize,Vector2):
-            super().SetSize(fontSize)
-
-            self.surface = pygame.transform.scale(self.oriSurface, self.size.tuple)
+        self.surface = self.font.render(self.text,True,self.color)
 
     def SetText(self, text: str):
         self.text = text

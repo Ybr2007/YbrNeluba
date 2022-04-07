@@ -39,12 +39,19 @@ class BaseSet(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
         dSizeX = size.x - self.size.x
         dSizeY = size.y - self.size.y
 
-
-        self.size = size
+        super().SetSize(size)
 
         for obj in self.objects:
             if isinstance(obj,BasePhysicalObject):
                 obj.SetSize(Vector2(obj.size.x + dSizeX,obj.size.y + dSizeY))
+
+    def SetScale(self, scale: float):
+        newSize = scale / self.size.x
+        self.size = Vector2(scale,self.size.y * newSize)
+
+        for obj in self.objects:
+            if isinstance(obj,BasePhysicalObject):
+                obj.SetSize(obj.size * newSize)
 
     def Update(self):
         '''
