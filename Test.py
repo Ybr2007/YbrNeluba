@@ -1,7 +1,7 @@
 '''
-1.1.3
-Time:2022.4.6
-1.为ViewObject的SetSize添加等比缩放重载
+1.1.4
+Time:2022.4.7
+1.添加缓动功能
 '''
 
 from Debug.DebugLog import Debug,DebugType
@@ -17,6 +17,10 @@ obj = YbrMatrixSo.Text(
 
 
 def Start():
+    YbrMatrixSo.Easing(
+        obj.SetPosition,YbrMatrixSo.Vector2(0,0),YbrMatrixSo.Vector2(400,400),
+        2000,YbrMatrixSo.EaseFuncation.BackEaseIn
+    )
     pass
 
 def Update():
