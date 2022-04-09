@@ -39,8 +39,10 @@ class BasePhysicalObject(BaseObject,metaclass = abc.ABCMeta):
         参数:
             size:大小
         '''
-        size = size.Abs()
         self.size = size
+        self.size.x = max(0,self.size.x)
+        self.size.y = max(0,self.size.y)
+        self.size.Update()
 
     @abc.abstractmethod
     def SetScale(self,scale : float):

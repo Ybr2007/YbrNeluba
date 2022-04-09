@@ -4,6 +4,8 @@ import pygame
 from Math.Math import Vector2
 from Color.Color import *
 
+pygame.font.init()
+
 class Text(BaseViewObject,BaseSaveAbleObject):
     '''
     文本类

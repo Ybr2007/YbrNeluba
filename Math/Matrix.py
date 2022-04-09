@@ -23,7 +23,7 @@ class Matrix:
         '''
         转换为字符串
         '''
-        return str(self.data)
+        return "Matrix:"+str(self.data)
 
     def __getitem__(self,index):
         '''

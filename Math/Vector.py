@@ -47,7 +47,7 @@ class Vector2(Matrix):
         '''
         转换为字符串
         '''
-        return str(self.tuple)
+        return "Vector"+str(self.tuple)
 
     def Abs(self):
         '''
@@ -102,7 +102,7 @@ class Vector3(Matrix):
         '''
         转换为字符串
         '''
-        return str(self.tuple)
+        return "Vector"+str(self.tuple)
 
 # 矩阵与向量的转换
 

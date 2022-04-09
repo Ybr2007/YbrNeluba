@@ -19,7 +19,6 @@ class Rect(BaseViewObject,BaseSaveAbleObject):
         self.surface = pygame.Surface(self.size.tuple)
         self.surface.set_colorkey(Color.Black.value)
         self.surface = self.surface.convert_alpha()
-
         pygame.draw.rect(self.surface, self.color, (0, 0, self.size.x, self.size.y), self.width, self.r)
 
     def SetPosition(self, position: Vector2):
@@ -41,6 +40,16 @@ class Rect(BaseViewObject,BaseSaveAbleObject):
         self.surface = self.surface.convert_alpha()
 
         pygame.draw.rect(self.surface, self.color, (0, 0, self.size.x, self.size.y), self.width, self.r)
+
+    def SetColor(self, color: tuple):
+        self.color = color
+
+        self.surface = pygame.Surface(self.size.tuple)
+        self.surface.set_colorkey(Color.Black.value)
+        self.surface = self.surface.convert_alpha()
+
+        pygame.draw.rect(self.surface, self.color, (0, 0, self.size.x, self.size.y), self.width, self.r)
+
     def Draw(self, surface: pygame.Surface):
         return super().Draw(surface)
 

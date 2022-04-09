@@ -19,6 +19,32 @@ class BaseSet(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
             self.objects = []
         else:
             self.objects = objects
+            for obj in self.objects:
+                if not isinstance(obj,BasePhysicalObject):
+                    Debug.Log("Set中的Object必须是实体组件",type=DebugType.Error)
+                    raise TypeError("Set中的Object必须是实体组件")
+
+        self.PosProportions = []
+        for obj in self.objects:
+            if isinstance(obj,BasePhysicalObject):
+                self.PosProportions.append(Vector2(obj.position.x / self.size.x,obj.position.y / self.size.y))
+            
+        self.SizeProportions = []
+        for obj in self.objects:
+            if isinstance(obj,BasePhysicalObject):
+                self.SizeProportions.append(Vector2(obj.size.x / self.size.x,obj.size.y / self.size.y))
+
+    def Keep(self):
+        '''
+        保持组件位置和大小
+        '''
+        for obj in self.objects:
+            if isinstance(obj,BasePhysicalObject):
+                obj.SetPosition(Vector2(self.PosProportions[self.objects.index(obj)].x * self.size.x,
+                                            self.PosProportions[self.objects.index(obj)].y * self.size.y))
+
+                obj.SetSize(Vector2(self.SizeProportions[self.objects.index(obj)].x * self.size.x,
+                                            self.SizeProportions[self.objects.index(obj)].y * self.size.y))
     
     def SetPosition(self, position: Vector2):
         '''
@@ -28,9 +54,7 @@ class BaseSet(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
 
         self.position = position
 
-        for obj in self.objects:
-            if isinstance(obj,BasePhysicalObject):
-                obj.SetPosition(obj.position + dPos)
+        self.Keep()
 
     def SetSize(self, size: Vector2):
         '''
@@ -41,17 +65,13 @@ class BaseSet(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
 
         super().SetSize(size)
 
-        for obj in self.objects:
-            if isinstance(obj,BasePhysicalObject):
-                obj.SetSize(Vector2(obj.size.x + dSizeX,obj.size.y + dSizeY))
+        self.Keep()
 
     def SetScale(self, scale: float):
         newSize = scale / self.size.x
         self.size = Vector2(scale,self.size.y * newSize)
 
-        for obj in self.objects:
-            if isinstance(obj,BasePhysicalObject):
-                obj.SetSize(obj.size * newSize)
+        self.Keep()
 
     def Update(self):
         '''
@@ -92,7 +112,7 @@ class BaseSet(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
         加载
         '''
         return BaseSet(
-            position=data['data']['position'],
-            size=data['data']['size'],
-            objects=[obj['type'](obj[data]) for obj in data['data']['objects']]
+            position=data['position'],
+            size=data['size'],
+            objects=[obj['type'].Load(obj['data']) for obj in data['objects']]
         )
