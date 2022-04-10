@@ -7,7 +7,7 @@ class BaseUpdateObject(BaseObject,metaclass = abc.ABCMeta):
     所有可更新Object的基类
     '''
     @abc.abstractmethod
-    def Update(self):
+    def Update(self,event = None):
         '''
         更新
         '''

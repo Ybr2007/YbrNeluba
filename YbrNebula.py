@@ -16,6 +16,7 @@ from Funcation.Funcation import *
 from Saver.Saver import *
 from Framework.Framework import *
 from Framework.GlobalVariable import *
+from Framework.Procedure import *
 from Debug.Debug import *
 from Object.Objects import *
 from Color.Color import *

@@ -15,6 +15,7 @@ class Timer(BasePlayObject,BaseSaveAbleObject):
 
         self.timerEvent = TIMER
         self.time = time
+        self.id = id
 
         self.hasStopped = False
         self.isPaused = False
@@ -26,7 +27,7 @@ class Timer(BasePlayObject,BaseSaveAbleObject):
         if self.hasStopped:
             Debug.Log("计时器已停止",type=DebugType.Warning)
             return
-        TIMER = pygame.USEREVENT + 1
+        TIMER = pygame.USEREVENT + self.id
         pygame.time.set_timer(TIMER,self.time)
         self.timerEvent = TIMER
         self.isPaused = False
@@ -35,7 +36,7 @@ class Timer(BasePlayObject,BaseSaveAbleObject):
         '''
         停止计时器
         '''
-        TIMER = pygame.USEREVENT + 1
+        TIMER = pygame.USEREVENT + self.id
         pygame.time.set_timer(TIMER,0)
         self.timerEvent = TIMER
         self.hasStopped = True
@@ -44,7 +45,7 @@ class Timer(BasePlayObject,BaseSaveAbleObject):
         '''
         暂停计时器
         '''
-        TIMER = pygame.USEREVENT + 1
+        TIMER = pygame.USEREVENT + self.id
         pygame.time.set_timer(TIMER,0)
         self.timerEvent = TIMER
         self.isPaused = True

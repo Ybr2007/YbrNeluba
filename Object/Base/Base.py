@@ -5,3 +5,4 @@ from Object.Base.BaseViewObject import BaseViewObject
 from Object.Base.BaseUpdateObject import BaseUpdateObject
 from Object.Base.BasePlayObject import BasePlayObject
 from Object.Base.BaseSaveAbleObject import BaseSaveAbleObject
+from Object.Base.BaseObjectStateType import BaseObjectStateType

@@ -7,4 +7,5 @@ from Object.Component.Audio import *
 from Object.Component.Timer import *
 from Object.Component.TimeLine import *
 from Object.Component.Button import *
+from Object.Component.InputBox import *
 from Object.Set.BaseSet import *

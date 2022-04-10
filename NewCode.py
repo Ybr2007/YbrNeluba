@@ -3,7 +3,7 @@ import pygame
 
 Nebula.Init() # 初始化
 window = Nebula.CreateWindow(
-    (800, 600),"Ybr Nebula",pygame.image.load("Asset\YbrMatrixSoLogo.png"),
+    (800, 600),"Ybr Nebula",
     resizable=True
 ) # 创建窗口
 

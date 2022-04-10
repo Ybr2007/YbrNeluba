@@ -10,7 +10,7 @@ import pygame
 class Button(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
     def __init__(
         self,position : Vector2,size : Vector2,
-        text : Text = Text(zeroVector2,text='Button',fontSize=24),
+        text : Text = Text(zeroVector2,text='',fontSize=24),
         rect : Rect = None,
         normalColor : tuple = Color.LightGray.value,
         hoverColor : tuple = Color.Gray.value,
@@ -38,9 +38,10 @@ class Button(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
             rect = Rect(self.position,self.size)
 
         self.rect = rect
-        self.rect.SetPosition(self.position)
-        self.rect.SetSize(self.size)
-        self.rect.SetColor(normalColor)
+        if self.rect is not False:
+            self.rect.SetPosition(self.position)
+            self.rect.SetSize(self.size)
+            self.rect.SetColor(normalColor)
 
         self.normalColor = normalColor
         self.hoverColor = hoverColor
@@ -71,22 +72,26 @@ class Button(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
         self.isPress = False
 
     def Draw(self,window : pygame.Surface):
+        if self.rect is not False:
+            self.rect.Draw(window)
+        self.text.Draw(window)
         if self.isPress:
             if self.pressImage:
                 self.pressImage.Draw(window)
-            self.rect.SetColor(self.pressColor)
+            if self.rect is not False:
+                self.rect.SetColor(self.pressColor)
         elif self.isHover:
             if self.hoverImage:
                 self.hoverImage.Draw(window)
-            self.rect.SetColor(self.hoverColor)
+            if self.rect is not False:
+                self.rect.SetColor(self.hoverColor)
         else:
             if self.normalImage:
                 self.normalImage.Draw(window)
-            self.rect.SetColor(self.normalColor)
-        self.rect.Draw(window)
-        self.text.Draw(window)
+            if self.rect is not False:
+                self.rect.SetColor(self.normalColor)
 
-    def Update(self):
+    def Update(self,event = None):
         if not pygame.mouse.get_focused():
             for func in self.onLeaveCallBack:
                 func()
@@ -166,7 +171,8 @@ class Button(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
         super().SetPosition(position)
 
         SetPosWithProportion(self.text,self.position,self.position + self.size,0.5)
-        self.rect.SetPosition(self.position)
+        if self.rect is not False:
+            self.rect.SetPosition(self.position)
         if self.normalImage:
             SetPosWithProportion(self.normalImage,self.position,self.position + self.size,0.5)
         if self.hoverImage:
@@ -184,8 +190,9 @@ class Button(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
                 self.text.SetSize(self.size)
         SetPosWithProportion(self.text,self.position,self.position + self.size,0.5)
 
-        self.rect.SetSize(self.size)
-        self.rect.SetPosition(self.position)
+        if self.rect is not False:
+            self.rect.SetSize(self.size)
+            self.rect.SetPosition(self.position)
 
         self.text.SetSize(Vector2(self.size.x * self.oriTextSizeProportion.x,self.size.y * self.oriTextSizeProportion.y))
         SetPosWithProportion(self.text,self.position,self.position + self.size,0.5)
@@ -202,8 +209,10 @@ class Button(BaseViewObject,BaseUpdateObject,BaseSaveAbleObject):
 
         self.text.SetScale(scale)
         SetPosWithProportion(self.text,self.position,self.position + self.size,0.5)
-        self.rect.SetSize(self.size)
-        self.rect.SetPosition(self.position)
+
+        if self.rect is not False:
+            self.rect.SetSize(self.size)
+            self.rect.SetPosition(self.position)
         
         if self.normalImage:
             self.normalImage.SetScale(scale)

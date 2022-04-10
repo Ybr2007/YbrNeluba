@@ -1,6 +1,7 @@
 import math
 from enum import Enum
 import threading
+from Framework.GlobalVariable import isGameOver
 import time
 
 def QuadEaseIn(b,e,t,dt):
@@ -35,9 +36,12 @@ def __EasingThread(func,b,e,duration,funcation,callback,dt = 10,*args):
     '''
     缓动线程
     '''
+    global isGameOver
     timer = 0
     func(b,*args)
     while timer < duration:
+        if isGameOver:
+            return
         timer += dt
         func(funcation(b,e,timer,duration),*args)
         time.sleep(dt/1000)
